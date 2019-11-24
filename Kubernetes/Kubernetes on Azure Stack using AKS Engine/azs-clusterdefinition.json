@@ -1,0 +1,59 @@
+{
+    "apiVersion": "vlabs",
+    "location": "local",
+    "properties": {
+        "orchestratorProfile": {
+            "orchestratorType": "Kubernetes",
+            "orchestratorRelease": "1.14",
+            "kubernetesConfig": {
+                "kubernetesImageBase": "mcr.microsoft.com/k8s/azurestack/core/",
+                "useInstanceMetadata": false,
+                "networkPlugin": "flannel",
+                "kubeProxyMode" : "ipvs"
+            }
+        },
+        "customCloudProfile": {
+            "portalURL": "https://portal.local.azurestack.external"
+            
+        },
+        "featureFlags": {
+            "enableTelemetry": true
+        },
+        "masterProfile": {
+            "count": 3,
+            "dnsPrefix": "azsk8sclu1",
+            "vmSize": "Standard_D2_v2",
+            "distro": "ubuntu",
+            "vnetSubnetId": "/subscriptions/7ae91a15-b0f0-47d1-8cf2-185bfc4eec07/resourceGroups/kubernetes-vnet/providers/Microsoft.Network/virtualNetworks/kubernetes-vnet/subnets/kubernetes-master-subnet",
+            "firstConsecutiveStaticIP": "10.3.9.5"
+          },
+        "agentPoolProfiles": [
+            {
+              "name": "agents",
+              "count": 3,
+              "vmSize": "Standard_D12",
+              "distro": "ubuntu",
+              "vnetSubnetId": "/subscriptions/7ae91a15-b0f0-47d1-8cf2-185bfc4eec07/resourceGroups/kubernetes-vnet/providers/Microsoft.Network/virtualNetworks/kubernetes-vnet/subnets/kubernetes-agents-subnet",
+              "availabilityProfile": "AvailabilitySet",
+              "AcceleratedNetworkingEnabled": false 
+ 
+            }
+           
+          ],
+
+        "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "<your public key> azureuser"
+                }
+              ]
+            }
+          },
+        "servicePrincipalProfile": {
+            "clientId": "",
+            "secret": ""
+        }
+    }
+}

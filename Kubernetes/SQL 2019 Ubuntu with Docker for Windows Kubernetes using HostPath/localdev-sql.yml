@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localdev-sql
+ 
+  labels:
+    app: localdev-sql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localdev-sql
+  template:
+    metadata:
+      labels:
+        app: localdev-sql
+    spec:
+      hostname: sqlubpod1
+      containers:
+        - name: localdev-sql
+          image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              value: "my_P@ssw0rd1"
+            - name: MSSQL_DATA_DIR
+              value: "/mssql/dbs"
+            # - name: MSSQL_PID
+            #   value: "Entreprise"
+          ports:
+            - containerPort: 1433
+          volumeMounts:
+            - name: mssql
+              mountPath: /mssql/dbs
+      volumes:
+        - name: mssql
+          persistentVolumeClaim:
+            claimName: localdev-sqlpv-claim
+     
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: localdev-sql-lb
+spec:
+  ports:
+    - port: 1433
+      protocol: TCP
+      targetPort: 1433
+
+  selector:
+    app: localdev-sql
+
+  type: LoadBalancer
