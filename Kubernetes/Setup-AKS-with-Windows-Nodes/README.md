@@ -3,11 +3,12 @@
 I am setting up AKS cluster with Windows nodes using a dedicated Subnet for our cluster and a custom CIDR for services in Kubernetes.
 
 Lets start with creating a resource group:
+
 `az group create --name zlabaks-rg1 --location westus2`
 
 #### Create a VNET and Subnet:
-`az network vnet create --name zlabaks-vnet1   --resource-group zlabaks-rg1 --address-prefixes 10.98.0.0/16 \
 
+`az network vnet create --name zlabaks-vnet1   --resource-group zlabaks-rg1 --address-prefixes 10.98.0.0/16 \
 --subnet-name zlabaks-kubecluster-subnet --subnet-prefix 10.98.16.0/21 `
 
 #### Install aks-preview CLI extension
