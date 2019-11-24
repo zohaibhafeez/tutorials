@@ -1,5 +1,5 @@
 
-
+#Setup Site to Site VPN with Azure and Cisco ASA IOS version 9.8 and below
 
 Azure has multiple configuration recipes when comes to establishing Site to Site VPN tunnel with ASA. They have sample ASA configuration outlined on their web site but speaking from my own experience, it did not help at all. Despite having the exact same configuration which was provided by Azure, we kept getting the following error:
 
