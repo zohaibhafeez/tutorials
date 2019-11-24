@@ -8,8 +8,11 @@ Lets start with creating a resource group:
 
 #### Create a VNET and Subnet:
 
-`az network vnet create --name zlabaks-vnet1   --resource-group zlabaks-rg1 --address-prefixes 10.98.0.0/16 \
---subnet-name zlabaks-kubecluster-subnet --subnet-prefix 10.98.16.0/21 `
+```
+az network vnet create --name zlabaks-vnet1   --resource-group zlabaks-rg1 --address-prefixes 10.98.0.0/16 \
+
+--subnet-name zlabaks-kubecluster-subnet --subnet-prefix 10.98.16.0/21 
+```
 
 #### Install aks-preview CLI extension
 ` az  extension  add --name aks-preview `
